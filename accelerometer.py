@@ -17,8 +17,8 @@ accel_address = const(0x53)
 
 
 class Accelerometer:
-    ''' This class implements and initializes an accelerometer
-        using I2C communication protocol'''
+    ''' This class implements and initializes an ADXL345 digital accelerometer
+        using I2C communication protocol and micropython'''
     
     def __init__ (self, pin_1, pin_2):
         self.scl = pyb.Pin(pin_1, mode=pyb.Pin.AF_OD, af=pyb.Pin.AF4_I2C1, pull=pyb.Pin.PULL_UP)
