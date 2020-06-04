@@ -1,7 +1,7 @@
 """
 This program prompts the user to enter number of cycles and frequency.
 It then writes data to a microcontroller via serial communication and
-plots the data send back to it.
+plots the data sent back to it and also creates an excel file with the stored data.
 
 @author: Darya Darvish
 """
