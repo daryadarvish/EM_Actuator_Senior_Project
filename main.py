@@ -9,12 +9,12 @@ and is responsible for creating instances of accelerometer and solenoid class.
 
 import pyb
 import solenoid
-import accelerometer
+import accelerometer_ADXL345
 import time, utime
 
 if __name__ == "__main__":
     actuator = solenoid.Solenoid(pyb.Pin.board.PA8)
-    accel = accelerometer.Accelerometer(pyb.Pin.board.PB8,\
+    accel = accelerometer_ADXL345.Accelerometer(pyb.Pin.board.PB8,\
         pyb.Pin.board.PB9)
 
     while(True):

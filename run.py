@@ -6,6 +6,7 @@ plots the data send back to it.
 @author: Darya Darvish
 """
 
+import csv
 import serial, time
 from matplotlib import pyplot
 
@@ -15,6 +16,7 @@ ser.bytesize = serial.EIGHTBITS
 while True:
     ser.flushInput()
     ser.flushOutput()
+    file_name = input("\nEnter the output file name: ")
     try:
         num_cycles = int(input("Enter the number of cycles (1-10): "))
     except ValueError:
@@ -58,7 +60,7 @@ while True:
                 time_list.append(float(accel_data[4]))
     initial_time = time_list[0]
     time_list = [abs(x - initial_time) for x in time_list]
-    print(time_list)
+    #print(time_list)
     pyplot.plot(time_list, x_list, label='x axis')
     pyplot.plot(time_list, y_list, label='y axis')
     pyplot.plot(time_list, z_list, label='z axis')
@@ -69,5 +71,9 @@ while True:
     pyplot.show()
     pyplot.clf()
     ser.flush()
-    
+    with open(file_name, 'w', newline='') as my_file:
+        writer = csv.writer(my_file)
+        writer.writerow(["x-accel (g)", "y-accel (g)", "z-accel (g)", "time (ms)"])
+        for i in range(0, len(time_list)):
+            writer.writerow([x_list[i], y_list[i], z_list[i], time_list[i]]) 
 ser.close()
