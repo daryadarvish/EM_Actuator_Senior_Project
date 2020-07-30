@@ -84,31 +84,6 @@ class Accelerometer:
         for i in range (4,7):
             data[i] = data[i]*(self.gyro_range/32767)
         return data + [utime.ticks_ms()]
-
-    def unpack_bytes(self, value):
-        """this function return the correct data based on current range
-        """
-        if self.range == 2:
-            temp = (value & 0x3FF)/1.0
-            if value & 0x400:
-                temp -= 1024
-            temp = temp*2/1024
-        elif self.range == 4:
-            temp = (value & 0x7FF)/1.0
-            if value & 0x800:
-                temp -= 2048
-            temp = temp*4/2048
-        elif self.range == 8:
-            temp = (value & 0xFFF)/1.0
-            if value & 0x1000:
-                temp -= 4096
-            temp = temp*8/4096
-        elif self.range == 16:
-            temp = (value & 0x1FFF)/1.0
-            if value & 0x2000:
-                temp -= 8192
-            temp = temp*16/8192
-        return temp
     
     def set_range(self, new_range):
         #this function changes the acceleration range, +/- 2g, 4g, 8g, 16g
